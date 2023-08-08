@@ -7,6 +7,7 @@ import com.alpertign.newsmvvm.data.repository.RemoteDataSourceImpl
 import com.alpertign.newsmvvm.domain.repository.RemoteDataSource
 import com.alpertign.newsmvvm.util.Constants.API_KEY
 import com.alpertign.newsmvvm.util.Constants.BASE_URL
+import com.alpertign.newsmvvm.util.Constants.QUERY_STRING
 import com.alpertign.newsmvvm.util.Constants.SORTING_TYPE
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -53,7 +54,8 @@ object NetworkModule {
             .addInterceptor(
                 ApiKeyInterceptor(
                     API_KEY,
-                    SORTING_TYPE
+                    SORTING_TYPE,
+                    QUERY_STRING
                 )
             )
             .build()
