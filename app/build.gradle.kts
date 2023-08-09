@@ -38,8 +38,8 @@ android {
         jvmTarget = "17"
     }
 
-    buildFeatures {
-        dataBinding = true
+    dataBinding {
+        enable = true
     }
 }
 
@@ -81,7 +81,7 @@ dependencies {
     implementation("io.coil-kt:coil:2.3.0")
 
     //Gson
-    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
@@ -89,6 +89,9 @@ dependencies {
     //Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    //Lottie
+    implementation ("com.airbnb.android:lottie:5.2.0")
 
 
 
