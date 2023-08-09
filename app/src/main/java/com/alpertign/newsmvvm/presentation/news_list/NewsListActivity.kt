@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +21,12 @@ import com.alpertign.newsmvvm.databinding.ActivityNewsListBinding
 import com.alpertign.newsmvvm.domain.model.Article
 import com.alpertign.newsmvvm.domain.model.NetworkResult
 import com.alpertign.newsmvvm.presentation.news_detail.NewsDetailActivity
+import com.alpertign.newsmvvm.util.extensions.observeOnce
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -84,8 +87,6 @@ class NewsListActivity : AppCompatActivity() {
 
     private fun initializeObservers() {
         vm.articleResponse.observe(this) { response ->
-
-
             when (response) {
                 is NetworkResult.Success -> {
                     hideLoadingAnimation()
@@ -96,7 +97,7 @@ class NewsListActivity : AppCompatActivity() {
 
                 is NetworkResult.Error -> {
                     hideLoadingAnimation()
-                    //loadDataFromCache()
+                    readDatabase()
                     Toast.makeText(
                         this,
                         response.message.toString(),
@@ -153,6 +154,16 @@ class NewsListActivity : AppCompatActivity() {
     private fun formatDateToYYYYMMDD(date: Long): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(Date(date))
+    }
+
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            vm.readArticles.observeOnce(this@NewsListActivity) { databaseData ->
+                if (databaseData.isNotEmpty()) {
+                    newsListAdapter.setData(databaseData)
+                }
+            }
+        }
     }
 
 

@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.alpertign.newsmvvm.domain.model.ApiResponse
 import com.alpertign.newsmvvm.domain.model.Article
@@ -36,6 +37,7 @@ class NewsListViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     var articleResponse: MutableLiveData<NetworkResult<List<Article>>> = MutableLiveData()
+    val readArticles: LiveData<List<Article>> = useCases.getAllArticlesFromDatabaseUseCase.invoke().asLiveData()
 
     init {
         getCurrentArticles()
@@ -75,8 +77,8 @@ class NewsListViewModel @Inject constructor(
 
     }
 
-    private fun offlineCacheArticles(articles: List<Article>) {
-        //TODO("Not yet implemented")
+    private suspend fun offlineCacheArticles(articles: List<Article>) {
+        useCases.insertArticlesToDatabaseUseCase(articles)
     }
 
     private fun getCurrentArticles() {

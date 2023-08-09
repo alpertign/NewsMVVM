@@ -19,7 +19,6 @@ fun ImageView.bindImageUrl(
     imageUrl: String?
 ) {
 
-
     val loadImageUrl = imageUrl ?: "alpertign rocks"
 
     try {

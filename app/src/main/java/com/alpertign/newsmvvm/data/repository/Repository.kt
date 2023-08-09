@@ -19,7 +19,13 @@ class Repository @Inject constructor(
         return remote.getArticlesByDate(fromDate, toDate)
     }
 
-    suspend fun getSelectedArticle(articleId: Int): Article {
-        return local.getSelectedArticle(articleId)
+    fun getAllArticlesFromDatabase(): Flow<List<Article>> {
+        return local.getAllArticlesFromDatabase()
     }
+
+    suspend fun insertArticlesToDatabase(articles: List<Article>){
+        local.insertArticlesToDatabase(articles)
+    }
+
+
 }

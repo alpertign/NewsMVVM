@@ -19,15 +19,6 @@ class RemoteDataSourceImpl(
 ): RemoteDataSource {
     override suspend fun getArticlesByDate(fromDate: String, toDate: String): Response<ApiResponse> {
         return newsApi.getArticlesByDate(fromDate, toDate)
-
-//        if (response.isSuccessful) {
-//            val articles = response.body()?.articles ?: emptyList()
-//            //newsDatabase.newsDao().addArticles(articles)
-//            return flow { emit(articles) }
-//        } else {
-//            Log.e("RemoteDataSourceImpl","Response is not successful. ResponseCode:${response.code()}, ResponseMessage: ${response.message()}")
-//            return flow { emit(emptyList()) }
-//        }
     }
 
 }
