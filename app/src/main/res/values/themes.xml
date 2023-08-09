@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.NewsMVVM" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimary">@color/dark_primary</item>
         <item name="colorPrimaryVariant">@color/light_primary_variant</item>
         <item name="colorSecondary">@color/light_secondary</item>
         <item name="colorSecondaryVariant">@color/light_secondary_variant</item>

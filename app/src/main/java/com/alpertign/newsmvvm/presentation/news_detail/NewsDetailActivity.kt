@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsDetailBinding
-    private val vm: NewsDetailViewModel by viewModels()
     var articleUrl: String = ""
     companion object {
         private const val ARTICLE_URL = "article.url"
