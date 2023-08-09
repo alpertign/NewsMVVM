@@ -1,8 +1,14 @@
 package com.alpertign.newsmvvm.presentation.news_list
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,10 +18,13 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.alpertign.newsmvvm.R
 import com.alpertign.newsmvvm.databinding.ActivityNewsListBinding
 import com.alpertign.newsmvvm.domain.model.Article
+import com.alpertign.newsmvvm.domain.model.NetworkResult
 import com.alpertign.newsmvvm.presentation.news_detail.NewsDetailActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -41,7 +50,7 @@ class NewsListActivity : AppCompatActivity() {
             ivHearth.setOnClickListener {
                 Toast.makeText(
                     this@NewsListActivity,
-                    "Love you <3",
+                    getString(R.string.love_you_3),
                     Toast.LENGTH_SHORT
                 ).show() }
 
@@ -63,8 +72,6 @@ class NewsListActivity : AppCompatActivity() {
 
             newsListAdapter.callBack = object : NewsListAdapter.NewsListAdapterCallBack {
                 override fun onclickArticle(article: Article) {
-
-                    //TODO("tıklayınca databaseden article i çek sonucunda aktar")
                     this@NewsListActivity.run {
                         startActivity(NewsDetailActivity.newIntent(this@NewsListActivity,article.url?: ""))
                     }
@@ -76,9 +83,40 @@ class NewsListActivity : AppCompatActivity() {
     }
 
     private fun initializeObservers() {
-        vm.articles.observe(this) {
-            newsListAdapter.setData(it)
+        vm.articleResponse.observe(this) { response ->
+
+
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideLoadingAnimation()
+                    response.data?.let {
+                        newsListAdapter.setData(it)
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    hideLoadingAnimation()
+                    //loadDataFromCache()
+                    Toast.makeText(
+                        this,
+                        response.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is NetworkResult.Loading -> {
+                    showLoadingAnimation()
+                }
+            }
         }
+    }
+
+    private fun showLoadingAnimation() {
+        binding.animationView.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingAnimation() {
+        binding.animationView.visibility = View.GONE
     }
 
     private fun showDateRangePicker(){
@@ -105,7 +143,6 @@ class NewsListActivity : AppCompatActivity() {
 
             vm.getArticles(startDateText,endDateText)
 
-            Log.d("NewsListActivity", "Selected date range: $startDateText - $endDateText")
         }
         dateRangePicker.addOnNegativeButtonClickListener {
             dateRangePicker.dismiss()
@@ -117,4 +154,6 @@ class NewsListActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(Date(date))
     }
+
+
 }

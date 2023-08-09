@@ -6,4 +6,5 @@
     <string name="hearth_icon">Hearth Icon</string>
     <string name="article_details">Article Details</string>
     <string name="select_date_range">Select Date Range</string>
+    <string name="love_you_3"><![CDATA[Love you <3]]></string>
 </resources>

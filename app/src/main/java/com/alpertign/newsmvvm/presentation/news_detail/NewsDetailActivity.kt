@@ -1,5 +1,6 @@
 package com.alpertign.newsmvvm.presentation.news_detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class NewsDetailActivity : AppCompatActivity() {
 
         }
     }
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
