@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/surface"
         tools:context=".presentation.news_list.NewsListActivity">
 
 
@@ -50,7 +51,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_filter_list_24"
-                    app:tint="@color/black" />
+                    app:tint="@color/on_surface" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -58,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ubuntu"
                     android:text="@string/soccer_news"
-                    android:textColor="@color/black"
+                    android:textColor="@color/on_surface"
                     android:textSize="24sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +76,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_heart_24" />
+                    app:srcCompat="@drawable/ic_heart_24"
+                    app:tint="@color/on_surface" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>

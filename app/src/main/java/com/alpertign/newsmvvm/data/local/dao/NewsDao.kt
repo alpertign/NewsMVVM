@@ -15,6 +15,9 @@ interface NewsDao {
     @Query("SELECT * FROM news_table ORDER BY id ASC")
     fun getAllArticlesFromDatabase() : Flow<List<Article>>
 
+    // İnternet olmadığında databaseden verileri id sine göre çekmek saçma fakat api cevabında sort edebileceğim
+    // bir date değişkeni yok.
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticlesToDatabase(articles : List<Article>)
 

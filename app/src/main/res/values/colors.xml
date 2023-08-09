@@ -4,15 +4,16 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="light_primary">#1976D2</color>
-    <color name="light_primary_variant">#1E88E5</color>
-    <color name="light_secondary">#388E3C</color>
-    <color name="light_secondary_variant">#689F38</color>
+    <color name="primary">#728AA1</color>
+    <color name="primary_variant">#91AFCC</color>
+    <color name="secondary">#A68048</color>
+    <color name="secondary_variant">#DCAA61</color>
 
-    <color name="dark_primary">#303F9F</color>
-    <color name="dark_primary_variant">#536DFE</color>
-    <color name="dark_secondary">#388E3C</color>
-    <color name="dark_secondary_variant">#689F38</color>
+    <color name="surface">#D6BD97</color>
+    <color name="surface_variant">#F8E4C6</color>
+    <color name="on_surface">#1E1D1C</color>
+
+
     <color name="transparent">#00FFFFFF</color>
     <color name="black_38">#61000000</color>
     <color name="black_80">#CC000000</color>
