@@ -14,8 +14,12 @@ data class Article (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    val title: String = "",
-    val description: String = "",
-    val url: String = "",
-    val urlToImage: String = ""
+    val source: ArticleSource? = null,
+    val author: String? = "",
+    val title: String? = "",
+    val description: String? = "",
+    val url: String? = "",
+    val urlToImage: String? = "",
+    val publishedAt: String? = "",
+    val content: String? = ""
 )

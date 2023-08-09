@@ -1,5 +1,6 @@
 package com.alpertign.newsmvvm.di
 
+import android.content.Context
 import com.alpertign.newsmvvm.data.interceptor.NewsApiInterceptor
 import com.alpertign.newsmvvm.data.local.NewsDatabase
 import com.alpertign.newsmvvm.data.remote.NewsApi
@@ -9,10 +10,13 @@ import com.alpertign.newsmvvm.util.Constants.API_KEY
 import com.alpertign.newsmvvm.util.Constants.BASE_URL
 import com.alpertign.newsmvvm.util.Constants.QUERY_STRING
 import com.alpertign.newsmvvm.util.Constants.SORTING_TYPE
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -29,10 +33,26 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(@ApplicationContext context: Context): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(
+                ChuckerInterceptor.Builder(context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
+            )
+            .addInterceptor(
+                NewsApiInterceptor(
+                    API_KEY,
+                    SORTING_TYPE,
+                    QUERY_STRING
+                )
+            )
             .readTimeout(
                 15,
                 TimeUnit.SECONDS
@@ -47,17 +67,8 @@ object NetworkModule {
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
-    fun provideRetrofitInstance(): Retrofit {
+    fun provideRetrofitInstance(httpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
-        val httpClient = OkHttpClient.Builder()
-            .addInterceptor(
-                NewsApiInterceptor(
-                    API_KEY,
-                    SORTING_TYPE,
-                    QUERY_STRING
-                )
-            )
-            .build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(httpClient)

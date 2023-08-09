@@ -10,7 +10,7 @@ class NewsApiInterceptor(private val apiKey: String, private val sortingType: St
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val url = originalRequest.url.newBuilder()
-            .addQueryParameter("API_KEY", apiKey)
+            .addQueryParameter("apiKey", apiKey)
             .addQueryParameter("sortBy",sortingType)
             .addQueryParameter("q",queryString)
             .build()

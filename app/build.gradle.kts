@@ -86,6 +86,10 @@ dependencies {
     // KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
+    //Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
 
 
 }
