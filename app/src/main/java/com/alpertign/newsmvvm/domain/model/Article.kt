@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = NEWS_DATABASE_TABLE)
 data class Article (
     @PrimaryKey(autoGenerate = true)
-    val id: Int = Int.MIN_VALUE,
+    val id: Int = 0,
 
     val title: String = "",
     val description: String = "",

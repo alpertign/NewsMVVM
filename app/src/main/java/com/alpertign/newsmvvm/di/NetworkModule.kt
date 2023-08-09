@@ -1,6 +1,6 @@
 package com.alpertign.newsmvvm.di
 
-import com.alpertign.newsmvvm.data.interceptor.ApiKeyInterceptor
+import com.alpertign.newsmvvm.data.interceptor.NewsApiInterceptor
 import com.alpertign.newsmvvm.data.local.NewsDatabase
 import com.alpertign.newsmvvm.data.remote.NewsApi
 import com.alpertign.newsmvvm.data.repository.RemoteDataSourceImpl
@@ -16,7 +16,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -52,7 +51,7 @@ object NetworkModule {
         val contentType = "application/json".toMediaType()
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(
-                ApiKeyInterceptor(
+                NewsApiInterceptor(
                     API_KEY,
                     SORTING_TYPE,
                     QUERY_STRING

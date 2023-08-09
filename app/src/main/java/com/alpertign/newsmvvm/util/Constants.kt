@@ -6,7 +6,7 @@ package com.alpertign.newsmvvm.util
 object Constants {
 
     const val API_KEY = "ae68088e70d04639b4950bdc9d546924"
-    const val BASE_URL = "https://newsapi.org/v2"
+    const val BASE_URL = "https://newsapi.org/v2/"
     const val SORTING_TYPE = "publishedAt"
     const val QUERY_STRING = "football"
 

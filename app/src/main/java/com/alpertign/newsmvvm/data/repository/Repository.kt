@@ -13,11 +13,11 @@ class Repository @Inject constructor(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ) {
-    fun getCurrentArticle(fromDate: String,toDate: String): Flow<List<Article>>{
+    suspend fun getCurrentArticle(fromDate: String, toDate: String): Flow<List<Article>>{
         return remote.getCurrentArticles(fromDate, toDate)
     }
 
-    fun getArticlesByDate(fromDate: String,toDate: String): Flow<List<Article>>{
+    suspend fun getArticlesByDate(fromDate: String, toDate: String): Flow<List<Article>>{
         return remote.getCurrentArticles(fromDate, toDate)
     }
 

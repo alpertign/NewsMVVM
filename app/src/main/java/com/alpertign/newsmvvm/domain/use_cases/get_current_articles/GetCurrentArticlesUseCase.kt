@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 class GetCurrentArticlesUseCase(
     private val repository: Repository
 ) {
-    operator fun invoke(fromDate : String, toDate: String) : Flow<List<Article>> {
+    suspend operator fun invoke(fromDate : String, toDate: String) : Flow<List<Article>> {
         return repository.getCurrentArticle(fromDate, toDate)
     }
 }

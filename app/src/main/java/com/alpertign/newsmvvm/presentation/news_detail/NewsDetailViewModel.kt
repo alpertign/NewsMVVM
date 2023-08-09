@@ -10,6 +10,6 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class NewsDetailViewModel @Inject constructor(
-    useCases: UseCases
+    private val useCases: UseCases
 ) :ViewModel() {
 }

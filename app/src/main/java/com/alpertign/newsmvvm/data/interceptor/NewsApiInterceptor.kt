@@ -6,7 +6,7 @@ import okhttp3.Response
 /**
  * Created by Alperen Acikgoz on 08,August,2023
  */
-class ApiKeyInterceptor(private val apiKey: String,private val sortingType: String,private val queryString: String) : Interceptor {
+class NewsApiInterceptor(private val apiKey: String, private val sortingType: String, private val queryString: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val url = originalRequest.url.newBuilder()
