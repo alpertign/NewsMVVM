@@ -3,7 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
-    //id("kotlin-kapt") // databinding grovvy den kotline geçmemiş
+    id("com.google.devtools.ksp")
+    kotlin("plugin.serialization") version "1.5.21"
 }
 
 android {
@@ -68,7 +69,8 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
-    annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    //annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    ksp("androidx.room:room-compiler:2.5.2")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -83,6 +85,7 @@ dependencies {
 
     // KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
 
 
 }

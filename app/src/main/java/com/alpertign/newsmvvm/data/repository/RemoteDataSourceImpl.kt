@@ -1,5 +1,6 @@
 package com.alpertign.newsmvvm.data.repository
 
+import android.util.Log
 import com.alpertign.newsmvvm.data.local.NewsDatabase
 import com.alpertign.newsmvvm.data.remote.NewsApi
 import com.alpertign.newsmvvm.domain.model.Article
@@ -23,7 +24,9 @@ class RemoteDataSourceImpl(
             //newsDatabase.newsDao().addArticles(articles)
             return flow { emit(articles) }
         } else {
-            throw Exception("API call failed with code ${response.code()}")
+            //throw Exception("API call failed with code ${response.code()}")
+            Log.d("RemoteDataSourceImpl","Success alınamadı code: ${response.code()}")
+            return flow { emit(emptyList()) }
         }
     }
 
