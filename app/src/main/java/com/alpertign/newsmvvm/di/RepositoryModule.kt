@@ -3,7 +3,6 @@ package com.alpertign.newsmvvm.di
 import com.alpertign.newsmvvm.data.repository.Repository
 import com.alpertign.newsmvvm.domain.use_cases.UseCases
 import com.alpertign.newsmvvm.domain.use_cases.get_articles_by_date.GetArticlesByDateUseCase
-import com.alpertign.newsmvvm.domain.use_cases.get_current_articles.GetCurrentArticlesUseCase
 import com.alpertign.newsmvvm.domain.use_cases.get_selected_article.GetSelectedArticleUseCase
 import dagger.Module
 import dagger.Provides
@@ -23,7 +22,6 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases{
         return UseCases(
             getArticlesByDateUseCase = GetArticlesByDateUseCase(repository),
-            getCurrentArticlesUseCase = GetCurrentArticlesUseCase(repository),
             getSelectedArticleUseCase = GetSelectedArticleUseCase(repository)
         )
     }

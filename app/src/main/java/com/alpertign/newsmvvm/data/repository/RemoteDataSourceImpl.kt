@@ -15,21 +15,6 @@ class RemoteDataSourceImpl(
     private val newsApi: NewsApi,
     private val newsDatabase: NewsDatabase
 ): RemoteDataSource {
-    override suspend fun getCurrentArticles(fromDate: String, toDate: String): Flow<List<Article>> {
-
-        val response = newsApi.getCurrentArticles(fromDate, toDate)
-
-        if (response.isSuccessful) {
-            val articles = response.body()?.articles ?: emptyList()
-            //newsDatabase.newsDao().addArticles(articles)
-            return flow { emit(articles) }
-        } else {
-            //throw Exception("API call failed with code ${response.code()}")
-            Log.d("RemoteDataSourceImpl","Success alınamadı code: ${response.code()}")
-            return flow { emit(emptyList()) }
-        }
-    }
-
     override suspend fun getArticlesByDate(fromDate: String, toDate: String): Flow<List<Article>> {
         val response = newsApi.getArticlesByDate(fromDate, toDate)
 
@@ -38,9 +23,9 @@ class RemoteDataSourceImpl(
             //newsDatabase.newsDao().addArticles(articles)
             return flow { emit(articles) }
         } else {
-            throw Exception("API call failed with code ${response.code()}")
+            Log.e("RemoteDataSourceImpl","Response is not successful. ResponseCode:${response.code()}, ResponseMessage: ${response.message()}")
+            return flow { emit(emptyList()) }
         }
     }
-
 
 }

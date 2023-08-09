@@ -10,13 +10,6 @@ import retrofit2.http.Query
  */
 interface NewsApi {
     @GET("everything")
-    suspend fun getCurrentArticles(
-        @Query("from") fromDate: String = "",
-        @Query("to") toDate: String = "",
-    ): Response<ApiResponse>
-
-
-    @GET("everything")
     suspend fun getArticlesByDate(
         @Query("from") fromDate: String = "",
         @Query("to") toDate: String = "",
