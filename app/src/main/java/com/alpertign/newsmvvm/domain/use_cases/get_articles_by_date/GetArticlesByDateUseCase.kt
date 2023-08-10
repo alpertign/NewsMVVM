@@ -2,8 +2,6 @@ package com.alpertign.newsmvvm.domain.use_cases.get_articles_by_date
 
 import com.alpertign.newsmvvm.data.repository.Repository
 import com.alpertign.newsmvvm.domain.model.ApiResponse
-import com.alpertign.newsmvvm.domain.model.Article
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 /**

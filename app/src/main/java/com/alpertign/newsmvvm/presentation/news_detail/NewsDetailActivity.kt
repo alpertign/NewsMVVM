@@ -3,18 +3,16 @@ package com.alpertign.newsmvvm.presentation.news_detail
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebViewClient
-import androidx.activity.viewModels
-import com.alpertign.newsmvvm.R
+import androidx.appcompat.app.AppCompatActivity
 import com.alpertign.newsmvvm.databinding.ActivityNewsDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsDetailBinding
-    var articleUrl: String = ""
+    private var articleUrl: String = ""
     companion object {
         private const val ARTICLE_URL = "article.url"
         fun newIntent(context: Context, articleUrl: String): Intent {
