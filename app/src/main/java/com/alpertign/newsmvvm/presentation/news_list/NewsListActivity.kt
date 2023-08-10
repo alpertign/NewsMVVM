@@ -121,16 +121,11 @@ class NewsListActivity : AppCompatActivity() {
     }
 
     private fun showDateRangePicker(){
-        val constraintsBuilder = CalendarConstraints.Builder()
-        val now = MaterialDatePicker.todayInUtcMilliseconds()
-        constraintsBuilder.setStart(now - TimeUnit.DAYS.toMillis(1))
-        constraintsBuilder.setEnd(now)
 
         val dateRangePicker = MaterialDatePicker.Builder
             .dateRangePicker()
             .setTitleText(getString(R.string.select_date_range))
             .setTheme(R.style.CustomMaterial3DatePicker)
-            .setCalendarConstraints(constraintsBuilder.build())
             .build()
 
         dateRangePicker.show(supportFragmentManager,"alpertign")
